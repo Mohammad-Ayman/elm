@@ -1,0 +1,62 @@
+@media (max-width: 745px) {
+  /* 
+  
+  header
+  
+  */
+
+  .header {
+    margin: 0;
+    justify-content: space-evenly;
+  }
+  .search-container {
+    margin: 0;
+    width: auto;
+  }
+}
+
+@media (max-width: 650px) {
+  html {
+    font-size: 6px;
+  }
+
+  /*
+  
+  results.html
+  
+  */
+
+  .test {
+    flex-direction: column;
+    padding: 1rem 4rem;
+  }
+  .filters-container {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+  .results-main {
+    width: 100%;
+  }
+  .job-container {
+    gap: 2rem;
+  }
+  .job-card {
+    font-size: 1.5rem;
+  }
+  .results-aside {
+    align-self: center;
+  }
+
+  /*
+  
+  SingleJob
+  
+  */
+  .singleJob-section {
+    flex-direction: column;
+    padding: 2rem 4rem;
+  }
+  .singleJob-aside {
+    order: -1;
+  }
+}

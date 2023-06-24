@@ -15,7 +15,7 @@ body {
       rgba(0, 0, 0, 0.64),
       rgba(0, 0, 0, 0.64)
     ),
-    url("images/landing-background.jpg");
+    url("../images/landing-background.jpg");
   background-size: 100vw 100vh;
   background-repeat: no-repeat;
 
@@ -32,17 +32,17 @@ body {
 /*
 Header
 */
-.header {
+#index__header {
   justify-content: space-between;
   margin: 1rem 6rem 1rem 6rem;
 }
-.logo-header {
+#index__logo-header {
   width: 10rem;
 }
-nav ul li a {
+.sign-login li a {
   color: rgba(255, 255, 255, 1);
 }
-nav ul li a:hover {
+.sign-login li a:hover {
   color: #b2b2b2;
 }
 a,
@@ -58,7 +58,7 @@ ul {
 /*
 Main
 */
-.main {
+#index__main {
   flex-direction: column;
   align-items: start;
   gap: 1rem;
@@ -67,17 +67,17 @@ Main
   color: rgba(255, 255, 255, 1);
 }
 
-.main h2 {
+#index__main h2 {
   font-size: 5rem;
   font-weight: 500;
 }
-.main h3 {
+#index__main h3 {
   font-size: 3rem;
   font-weight: 500;
 }
 
 /* Search Container */
-.search-container {
+#index__search-container {
   justify-content: space-between;
   width: 100%;
   background-color: rgba(255, 255, 255, 1);
@@ -109,7 +109,7 @@ input:focus {
   outline: none;
   border: 0px;
 }
-.search-button {
+#search-button {
   background-color: rgba(73, 198, 244, 1);
   border: none;
   border-radius: 0.5rem;
@@ -117,7 +117,7 @@ input:focus {
   cursor: pointer;
   max-width: 100%;
 }
-.search-button:hover {
+#search-button:hover {
   color: rgba(73, 198, 244, 1);
   background-color: #a4a4a4;
 }
@@ -126,7 +126,7 @@ input:focus {
   html {
     font-size: 6px;
   }
-  .main {
+  #index__main {
     margin: auto 4rem;
     height: 75vh;
   }

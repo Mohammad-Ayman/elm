@@ -4,8 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Elm | علم</title>
-    <link rel="stylesheet" href="resultStyle.css" />
+    <link rel="stylesheet" href="./styles/resultStyle.css" />
+    <link rel="stylesheet" href="./styles/media-queries.css" />
     <link rel="shortcut icon" href="images/logo.png" type="image/x-icon" />
+    <script src="filter.js"></script>
   </head>
   <body>
     <header class="header flex">
@@ -53,33 +55,14 @@
     </header>
     <section class="container">
       <div class="test">
-        <aside>
+        <aside class="results-aside">
           <!-- <div class="filters-container flex"> -->
           <ul class="filters-container flex">
-            <li class="filter-card flex">
-              <div class="text-container">
-                <h2>Filter</h2>
-                <p>0 Filters selected</p>
-              </div>
-              <div class="filter__icon-container">
-                <a href="#"
-                  ><svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    class="chevron-icon"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </a>
-              </div>
+            <li class="filter-card">
+              <h2 id="display-all">Display all jobs</h2>
             </li>
             <li class="filter-card flex">
-              <div class="text-container">
+              <div class="text-container filter" id="country-filter">
                 <h2>Country</h2>
               </div>
               <div class="filter__icon-container">
@@ -100,7 +83,7 @@
               </div>
             </li>
             <li class="filter-card flex">
-              <div class="text-container">
+              <div class="text-container filter" id="city-filter">
                 <h2>City</h2>
               </div>
               <div class="filter__icon-container">
@@ -121,8 +104,8 @@
               </div>
             </li>
             <li class="filter-card flex">
-              <div class="text-container">
-                <h2>Area</h2>
+              <div class="text-container filter" id="skills-filter">
+                <h2>Skills</h2>
               </div>
               <div class="filter__icon-container">
                 <a href="#"
@@ -142,7 +125,7 @@
               </div>
             </li>
             <li class="filter-card flex">
-              <div class="text-container">
+              <div class="text-container filter" id="careerLevel-filter">
                 <h2>Career level</h2>
               </div>
               <div class="filter__icon-container">
@@ -163,7 +146,7 @@
               </div>
             </li>
             <li class="filter-card flex">
-              <div class="text-container">
+              <div class="text-container filter" id="jobCategory-filter">
                 <h2>Job category</h2>
               </div>
               <div class="filter__icon-container">
@@ -184,7 +167,7 @@
               </div>
             </li>
             <li class="filter-card flex">
-              <div class="text-container">
+              <div class="text-container filter" id="jobType-filter">
                 <h2>Job type</h2>
               </div>
               <div class="filter__icon-container">
@@ -205,7 +188,7 @@
               </div>
             </li>
             <li class="filter-card flex">
-              <div class="text-container">
+              <div class="text-container filter" id="datePosted-filter">
                 <h2>Date posted</h2>
               </div>
               <div class="filter__icon-container">
@@ -228,153 +211,8 @@
           </ul>
           <!-- </div> -->
         </aside>
-        <main class="main">
-          <ul class="job-container flex">
-            <li class="job-card flex">
-              <div class="text-container flex">
-                <h2>Front end developer</h2>
-                <p>Elm - Jeddah - Saudi Arabia</p>
-                <p>
-                  <span class="job-type">Full time</span>
-                  <span class="time-posted"> 1 hour ago</span>
-                </p>
-                <p>Experience 2-5 years - Communication skills</p>
-              </div>
-              <img
-                src="images/logo.png"
-                alt="Company logo "
-                class="job-card__company-logo"
-              />
-            </li>
-            <li class="job-card flex">
-              <div class="text-container flex">
-                <h2>Front end developer</h2>
-                <p>Elm - Jeddah - Saudi Arabia</p>
-                <p>
-                  <span class="job-type">Full time</span>
-                  <span class="time-posted"> 1 hour ago</span>
-                </p>
-                <p>Experience 2-5 years - Communication skills</p>
-              </div>
-              <img
-                src="images/logo.png"
-                alt="Company logo "
-                class="job-card__company-logo"
-              />
-            </li>
-            <li class="job-card flex">
-              <div class="text-container flex">
-                <h2>Front end developer</h2>
-                <p>Elm - Jeddah - Saudi Arabia</p>
-                <p>
-                  <span class="job-type">Full time</span>
-                  <span class="time-posted"> 1 hour ago</span>
-                </p>
-                <p>Experience 2-5 years - Communication skills</p>
-              </div>
-              <img
-                src="images/logo.png"
-                alt="Company logo "
-                class="job-card__company-logo"
-              />
-            </li>
-            <li class="job-card flex">
-              <div class="text-container flex">
-                <h2>Front end developer</h2>
-                <p>Elm - Jeddah - Saudi Arabia</p>
-                <p>
-                  <span class="job-type">Full time</span>
-                  <span class="time-posted"> 1 hour ago</span>
-                </p>
-                <p>Experience 2-5 years - Communication skills</p>
-              </div>
-              <img
-                src="images/logo.png"
-                alt="Company logo "
-                class="job-card__company-logo"
-              />
-            </li>
-            <li class="job-card flex">
-              <div class="text-container flex">
-                <h2>Front end developer</h2>
-                <p>Elm - Jeddah - Saudi Arabia</p>
-                <p>
-                  <span class="job-type">Full time</span>
-                  <span class="time-posted"> 1 hour ago</span>
-                </p>
-                <p>Experience 2-5 years - Communication skills</p>
-              </div>
-              <img
-                src="images/logo.png"
-                alt="Company logo "
-                class="job-card__company-logo"
-              />
-            </li>
-            <li class="job-card flex">
-              <div class="text-container flex">
-                <h2>Front end developer</h2>
-                <p>Elm - Jeddah - Saudi Arabia</p>
-                <p>
-                  <span class="job-type">Full time</span>
-                  <span class="time-posted"> 1 hour ago</span>
-                </p>
-                <p>Experience 2-5 years - Communication skills</p>
-              </div>
-              <img
-                src="images/logo.png"
-                alt="Company logo "
-                class="job-card__company-logo"
-              />
-            </li>
-            <li class="job-card flex">
-              <div class="text-container flex">
-                <h2>Front end developer</h2>
-                <p>Elm - Jeddah - Saudi Arabia</p>
-                <p>
-                  <span class="job-type">Full time</span>
-                  <span class="time-posted"> 1 hour ago</span>
-                </p>
-                <p>Experience 2-5 years - Communication skills</p>
-              </div>
-              <img
-                src="images/logo.png"
-                alt="Company logo "
-                class="job-card__company-logo"
-              />
-            </li>
-            <li class="job-card flex">
-              <div class="text-container flex">
-                <h2>Front end developer</h2>
-                <p>Elm - Jeddah - Saudi Arabia</p>
-                <p>
-                  <span class="job-type">Full time</span>
-                  <span class="time-posted"> 1 hour ago</span>
-                </p>
-                <p>Experience 2-5 years - Communication skills</p>
-              </div>
-              <img
-                src="images/logo.png"
-                alt="Company logo "
-                class="job-card__company-logo"
-              />
-            </li>
-            <li class="job-card flex">
-              <div class="text-container flex">
-                <h2>Front end developer</h2>
-                <p>Elm - Jeddah - Saudi Arabia</p>
-                <p>
-                  <span class="job-type">Full time</span>
-                  <span class="time-posted"> 1 hour ago</span>
-                </p>
-                <p>Experience 2-5 years - Communication skills</p>
-              </div>
-              <img
-                src="images/logo.png"
-                alt="Company logo "
-                class="job-card__company-logo"
-              />
-            </li>
-          </ul>
+        <main class="results-main">
+          <ul class="job-container flex"></ul>
         </main>
       </div>
     </section>
