@@ -1,18 +1,17 @@
+import { renderJobsPage } from "./allJobs.js";
 
-
-const renderSingleJob = (job, section) => {
+const renderSingleJob = (job, section, jobsArray) => {
   console.log(job);
+
   section.classList = "singleJob-section container flex";
   section.innerHTML = `
   <main class="singleJob-main">
   <article class="job-header flex">
-  <a href="results.html"
   <div class="arrow-icon__container">
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="arrow-icon">
   <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 9l-3 3m0 0l3 3m-3-3h7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
 </svg>  
   </div>
-  </a>
     <div class="info-container flex">
       <div class="info">
         <h2>${job.jobCategory}</h2>
@@ -44,7 +43,9 @@ const renderSingleJob = (job, section) => {
       />
     </div>
     <div class="apply flex">
-      <a href="#" class="apply-button">Apply for job</a>
+      <button  class="apply-button">
+      Apply for job
+      </button>
       <div class="vector-icon__container">
         <img src="./images/Vector.svg" alt="icon" class="vector-icon" />
       </div>
@@ -179,22 +180,46 @@ const renderSingleJob = (job, section) => {
   <a href="#">Browse all jobs</a>
 </aside>
   `;
-  backArrowHandler();
+  backArrowHandler(jobsArray);
+  applyJobBtnHandler(job);
+};
+const applyJobBtnHandler = (job) => {
+  const applyBtn = document.querySelector(".apply-button");
+
+  const emailContent = {
+    from_name: "user",
+    to_name: job.company,
+    message: `A new application for the ${job.jobCategory} role at ${job.company} from user`,
+  };
+
+  applyBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    emailjs.send("service_q3jogy9", "template_t5zr09r", emailContent).then(
+      function () {
+        alert("Email Sent Successfully");
+      },
+      function (error) {
+        console.log("FAILED...", error);
+      }
+    );
+  });
 };
 
-const singleJobHandler = (parentElement) => {
+const singleJobHandler = (parentElement, jobsArray) => {
   let sectionElement = document.querySelector("section");
   console.log(sectionElement.classList);
 
   parentElement.addEventListener("click", (e) => {
     const clickedJob = e.target.closest("li");
     const jobId = clickedJob.querySelector(".job-id").textContent;
-    const job = jobs.find((job) => job.id === +jobId);
-    renderSingleJob(job, sectionElement);
+    const job = jobsArray.find((job) => job.id === +jobId);
+    renderSingleJob(job, sectionElement, jobsArray);
   });
 };
 
-const backArrowHandler = () => {
+const backArrowHandler = (jobsArray) => {
   const arrowIcon = document.querySelector(".arrow-icon");
-  arrowIcon.addEventListener("click", () => renderAllJobs(arrowIcon));
+  arrowIcon.addEventListener("click", () => renderJobsPage(jobsArray));
 };
+
+export { singleJobHandler, backArrowHandler };

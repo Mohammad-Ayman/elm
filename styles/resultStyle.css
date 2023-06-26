@@ -112,6 +112,7 @@ container Section
 }
 .filter-card {
   justify-content: space-between;
+  align-items: flex-start;
   width: 100%;
   border-bottom: 1px solid rgba(217, 213, 213, 1);
 }
@@ -280,6 +281,7 @@ Main
   padding: 1rem 4rem;
   background-color: #49c6f4;
   border-radius: 0.5rem;
+  cursor: pointer;
 }
 .vector-icon__container {
   padding: 1rem;

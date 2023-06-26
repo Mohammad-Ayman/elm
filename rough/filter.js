@@ -277,7 +277,7 @@ const renderSingleJob = (job, section) => {
   <div class="arrow-icon__container">
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="arrow-icon">
   <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 9l-3 3m0 0l3 3m-3-3h7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-</svg>  
+</svg>
   </div>
   </a>
     <div class="info-container flex">
@@ -474,27 +474,43 @@ const Categories = new Set();
 const types = new Set();
 const datePosted = new Set();
 
-jobs.forEach((job) => {
-  countries.add(job.country);
-  cities.add(job.city);
-  skills.add(job.skills);
-  careerLevels.add(job.careerLevel);
-  Categories.add(job.jobCategory);
-  types.add(job.jobType);
-  datePosted.add(job.datePosted);
-});
+const populateSets = (jobsArray) => {
+  jobs.forEach((job) => {
+    countries.add(job.country);
+    cities.add(job.city);
+    skills.add(job.skills);
+    careerLevels.add(job.careerLevel);
+    Categories.add(job.jobCategory);
+    types.add(job.jobType);
+    datePosted.add(job.datePosted);
+  });
 
-// Convert sets to arrays
-const countriesArray = Array.from(countries);
-const citiesArray = Array.from(cities);
-const skillsArray = Array.from(skills);
-const careerLevelsArray = Array.from(careerLevels);
-const CategoriesArray = Array.from(Categories);
-const typesArray = Array.from(types);
+  // Convert sets to arrays
+  const countriesArray = Array.from(countries);
+  const citiesArray = Array.from(cities);
+  const skillsArray = Array.from(skills);
+  const careerLevelsArray = Array.from(careerLevels);
+  const CategoriesArray = Array.from(Categories);
+  const typesArray = Array.from(types);
 
-// console.log(careerLevels);
-// console.log(careerLevelsArray);
+  console.log(careerLevels);
+  console.log(careerLevelsArray);
+};
 
+// list filter elements inside filter container
+const listFilterElements = (filterArray, filter) => {
+  const clickedFilter = document.querySelector(`#${filter}-filter`);
+  const ulELement = document.createElement("ul");
+  clickedFilter.append(ulELement);
+  filterArray.forEach((array) => {
+    const liELement = document.createElement("li");
+    liELement.innerHTML = `
+    ${array}
+  `;
+    ulELement.appendChild(liELement);
+  });
+  renderFilteredElements(ulELement);
+};
 const renderFilteredElements = (target) => {
   target.addEventListener("click", (e) => {
     const selectedElement = e.target.textContent;
@@ -512,21 +528,8 @@ const renderFilteredElements = (target) => {
     renderAllJobs(filteredJobs);
   });
 };
-// list filter elements inside filter container
-const listFilterElements = (filterArray, filter) => {
-  const clickedFilter = document.querySelector(`#${filter}-filter`);
-  const ulELement = document.createElement("ul");
-  clickedFilter.append(ulELement);
-  filterArray.forEach((array) => {
-    const liELement = document.createElement("li");
-    liELement.innerHTML = `
-    ${array}
-  `;
-    ulELement.appendChild(liELement);
-  });
-  renderFilteredElements(ulELement);
-};
 const displayAllBtnHandler = () => {
+  console.log("I am clicked");
   const displayAll = document.getElementById("display-all");
   displayAll.addEventListener("click", () => {
     renderAllJobs(jobs);
@@ -537,3 +540,5 @@ const populateFilter = (filterArray, filter) => {
   listFilterElements(filterArray, filter);
   displayAllBtnHandler();
 };
+
+export { populateSets, populateFilter };

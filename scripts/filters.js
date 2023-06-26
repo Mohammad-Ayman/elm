@@ -1,7 +1,5 @@
-import { renderJobsPage, renderJobs, searchBtn } from "./scripts/allJobs.js";
-// import { populateSets, populateFilter } from "./filter.js";
+import { renderJobsPage } from "./allJobs.js";
 
-// Global Variables
 const jobs = [
   {
     id: 0,
@@ -42,9 +40,9 @@ const jobs = [
   },
   {
     id: 3,
-    company: "XYZ Corp",
+    company: "populateFilterHandler Corp",
     companyImage:
-      "https://www.mmaglobal.com/files/styles/member_logo_large/public/logos/xyzcorporatepro.png?itok=ehOUsiQj",
+      "https://www.mmaglobal.com/files/styles/member_logo_large/public/logos/populateFilterHandlercorporatepro.png?itok=ehOUsiQj",
     country: "Canada",
     city: "Toronto",
     skills: "Data Analysis",
@@ -204,8 +202,127 @@ const jobs = [
     datePosted: "15 hours ago",
   },
 ];
-const renderJobsPageHandler = () => {
-  renderJobsPage(jobs);
+
+const countries = new Set();
+const cities = new Set();
+const skills = new Set();
+const careerLevels = new Set();
+const Categories = new Set();
+const types = new Set();
+const datePosted = new Set();
+
+// const populateSets = (jobsArray) => {
+jobs.forEach((job) => {
+  countries.add(job.country);
+  cities.add(job.city);
+  skills.add(job.skills);
+  careerLevels.add(job.careerLevel);
+  Categories.add(job.jobCategory);
+  types.add(job.jobType);
+  datePosted.add(job.datePosted);
+});
+
+// console.log(careerLevels);
+// console.log(careerLevelsArray);
+// };
+
+// list filter elements inside filter container
+// const listFilterElements = (filterSet, filter) => {
+//   const clickedFilter = document.querySelector(`#${filter}-filter`);
+//   // console.log(clickedFilter);
+//   const ulELement = document.createElement("ul");
+//   clickedFilter.append(ulELement);
+//   filterSet.forEach((setElement) => {
+//     const liELement = document.createElement("li");
+//     liELement.innerHTML = `
+//      ${setElement}
+//   `;
+//     ulELement.appendChild(liELement);
+//   });
+//   renderFilteredElements(ulELement);
+// };
+
+const listFilterElements = (filterSet, filter) => {
+  const clickedFilter = document.querySelector(`#${filter}-filter`);
+  const ulElement = document.createElement("ul");
+  clickedFilter.append(ulElement);
+  filterSet.forEach((setElement) => {
+    const liElement = document.createElement("li");
+    const checkboxElement = document.createElement("input");
+    checkboxElement.type = "checkbox";
+    checkboxElement.value = setElement;
+    // checkboxElement.addEventListener("change", () => {
+    //   if (checkboxElement.checked) {
+    //     filteredJobs.push(setElement); // Add the selected value to the filteredJobs array
+    //   } else {
+    //     const index = filteredJobs.indexOf(setElement);
+    //     if (index !== -1) {
+    //       filteredJobs.splice(index, 1); // Remove the value from the filteredJobs array if unchecked
+    //     }
+    //   }
+    //   renderJobsPage(filteredJobs); // Render the updated filtered jobs
+    // });
+
+    const labelElement = document.createElement("label");
+    labelElement.textContent = setElement;
+    labelElement.prepend(checkboxElement);
+    liElement.appendChild(labelElement);
+    ulElement.appendChild(liElement);
+  });
+  renderFilteredElements(ulElement);
 };
 
-searchBtn.addEventListener("click", renderJobsPageHandler);
+const renderFilteredElements = (target) => {
+  target.addEventListener("click", (e) => {
+    let filteredJobs = [];
+    console.log(e.target.value);
+    const selectedElement = e.target.textContent;
+    const parentElement = e.target.parentNode;
+    const h2Element = parentElement.parentNode
+      .querySelector("h2")
+      .textContent.trim()
+      .toLowerCase();
+    const twoWordsH2Element = h2Element.split(" ")[1];
+    console.log(twoWordsH2Element);
+    console.log(parentElement);
+    console.log(selectedElement);
+    console.log("h2Element");
+    console.log(h2Element);
+    // if (twoWordsH2Element) {
+    //   filteredJobs = jobs.filter(
+    //     (job) => job[twoWordsH2Element] === selectedElement.trim()
+    //   );
+    // } else {
+    // }
+    console.log(filteredJobs);
+    filteredJobs = jobs.filter(
+      (job) => job[h2Element] === selectedElement.trim()
+    );
+    renderJobsPage(filteredJobs);
+  });
+};
+const displayAllBtnHandler = () => {
+  const displayAll = document.getElementById("display-all");
+  displayAll.addEventListener("click", () => {
+    renderJobsPage(jobs);
+  });
+};
+
+const populateFilter = (filterArray, filter) => {
+  listFilterElements(filterArray, filter);
+  displayAllBtnHandler();
+};
+// document.addEventListener("DOMContentLoaded", () => {
+const populateFilterHandler = () => {
+  populateFilter(countries, "country");
+  populateFilter(cities, "city");
+  populateFilter(skills, "skills");
+  populateFilter(careerLevels, "level");
+  populateFilter(Categories, "jobCategory");
+  populateFilter(types, "jobType");
+  populateFilter(datePosted, "datePosted");
+  // renderAllJobs(jobs);
+  // });
+};
+
+export { populateFilterHandler };

@@ -8,9 +8,19 @@
     <link rel="stylesheet" href="./styles/resultStyle.css" />
     <link rel="stylesheet" href="./styles/media-queries.css" />
     <link rel="shortcut icon" href="images/logo.png" type="image/x-icon" />
-    <!-- <script type="module" src="app.js"></script> -->
-    <script src="allJobs.js" defer></script>
+    <script type="module" src="app.js" defer></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/emailjs-com@2.6.4/dist/email.min.js"
+    ></script>
+    <script type="text/javascript">
+      (function () {
+        // https://dashboard.emailjs.com/admin/account
+        emailjs.init("LStjjyyYJunH9gWe2");
+      })();
+    </script>
   </head>
+
   <body>
     <header id="index__header" class="flex">
       <a href="#" class="logo__container">
@@ -27,7 +37,7 @@
         </ul>
       </nav>
     </header>
-    <main id="index__main" class="flex">  
+    <main id="index__main" class="flex">
       <h2>Find the best Jobs</h2>
       <h3>Search for jobs and career opportunities</h3>
       <div id="index__search-container" class="flex">
@@ -64,3 +74,4 @@
     </main>
   </body>
 </html>
+
