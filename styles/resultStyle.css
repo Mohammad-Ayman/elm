@@ -27,6 +27,9 @@ Header
   margin: 1rem 6rem 1rem 6rem;
   background-color: rgba(255, 255, 255, 1);
 }
+.logo-container {
+  cursor: pointer;
+}
 .logo-header {
   width: 10rem;
 }
@@ -109,7 +112,16 @@ container Section
   gap: 1rem;
   padding: 2rem 1rem;
   border-radius: 1rem;
+  flex-wrap: wrap;
 }
+.filters-container li:not(:last-child) {
+  flex-basis: 20%;
+}
+
+.filters-container li:last-child {
+  flex-basis: 100%;
+}
+
 .filter-card {
   justify-content: space-between;
   align-items: flex-start;
@@ -131,9 +143,46 @@ container Section
   width: 2rem;
   height: auto;
 }
+.chevron-icon__clicked {
+  transform: rotate(180deg);
+}
 
 .filter ul {
   display: none;
+  height: 5rem;
+  overflow-y: auto;
+}
+.check-box {
+  margin-right: 0.5rem;
+}
+.check-box__label {
+  color: rgba(82, 82, 82, 1);
+  font-size: 1.3rem;
+}
+.check-box__label-checked {
+  color: #0004f4;
+}
+.text-container ul {
+  height: 10rem;
+  overflow-y: auto;
+}
+.text-container ul::-webkit-scrollbar {
+  width: 0.5em;
+  height: 0.5em;
+}
+
+.text-container ul::-webkit-scrollbar-thumb {
+  background-color: #fff;
+}
+
+.text-container ul::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.text-container ul li {
+  margin-bottom: 0.5rem;
+}
+.text-container ul label {
+  font-size: 1.6rem;
 }
 
 /*Main */
@@ -278,8 +327,10 @@ Main
 }
 .apply-button {
   color: #000;
+  font-size: 1.7rem;
   padding: 1rem 4rem;
   background-color: #49c6f4;
+  border: none;
   border-radius: 0.5rem;
   cursor: pointer;
 }
@@ -297,7 +348,7 @@ Main
 .arrow-icon {
   width: 4rem;
   height: auto;
-  /* stroke: #49c6f4; */
+  stroke: aliceblue;
   fill: #49c6f4;
   /* color: #000; */
   cursor: pointer;
@@ -336,7 +387,7 @@ Main
 }
 
 /* 
-Aside
+single job Aside
 */
 .singleJob-aside {
   flex: 0 0 25%;
@@ -364,4 +415,11 @@ Aside
 }
 .singleJob-aside a:hover {
   color: #0004f4;
+}
+.browse-button {
+  font-size: 1.5rem;
+  background-color: inherit;
+  border: none;
+  color: #0004f4;
+  cursor: pointer;
 }

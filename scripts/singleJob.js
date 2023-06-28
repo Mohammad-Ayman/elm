@@ -1,4 +1,5 @@
 import { renderJobsPage } from "./allJobs.js";
+import { searchJobsHandler } from "./searching.js";
 
 const renderSingleJob = (job, section, jobsArray) => {
   console.log(job);
@@ -14,8 +15,8 @@ const renderSingleJob = (job, section, jobsArray) => {
   </div>
     <div class="info-container flex">
       <div class="info">
-        <h2>${job.jobCategory}</h2>
-        <p class="job-type">${job.jobType}</p>
+        <h2>${job.category}</h2>
+        <p class="job-type">${job.type}</p>
         <p>
           <span class="job-header__company">${job.company}</span>
           <span class="verify-icon__container">
@@ -34,10 +35,10 @@ const renderSingleJob = (job, section, jobsArray) => {
           </span>
           ${job.city} - ${job.country}
         </p>
-        <p>Posted ${job.datePosted} ago</p>
+        <p>Posted ${job.posted} ago</p>
       </div>
       <img
-      src=${job.companyImage ? job.companyImage : "images/logo.png"}
+      src=${job.image ? job.image : "images/logo.png"}
         alt="Company logo "
         class="job-card__company-logo"
       />
@@ -177,11 +178,21 @@ const renderSingleJob = (job, section, jobsArray) => {
     and Control, NTS-Workflow Management, NTS-Partner Relationship
     Management.
   </p>
-  <a href="#">Browse all jobs</a>
+  <button class="browse-button">Browse all jobs</button>
 </aside>
   `;
-  backArrowHandler(jobsArray);
   applyJobBtnHandler(job);
+  browseBtnHandler(job, jobsArray);
+  backArrowHandler(jobsArray);
+  // const searchBar = document.getElementById("search");
+  // searchBar.addEventListener("change", () =>
+  //   searchJobsHandler(searchBar, jobsArray, renderJobsPage)
+  // );
+  // searchBar.addEventListener("keypress", (event) => {
+  //   if (event.key === "Enter") {
+  //     searchJobsHandler(searchBar, jobsArray, renderJobs);
+  //   }
+  // });
 };
 const applyJobBtnHandler = (job) => {
   const applyBtn = document.querySelector(".apply-button");
@@ -189,7 +200,7 @@ const applyJobBtnHandler = (job) => {
   const emailContent = {
     from_name: "user",
     to_name: job.company,
-    message: `A new application for the ${job.jobCategory} role at ${job.company} from user`,
+    message: `A new application for the ${job.category} role at ${job.company} from user`,
   };
 
   applyBtn.addEventListener("click", (event) => {
@@ -205,9 +216,18 @@ const applyJobBtnHandler = (job) => {
   });
 };
 
+const browseBtnHandler = (job, jobsArray) => {
+  const browseBtn = document.querySelector(".browse-button");
+  const browseJobsFilter = jobsArray.filter(
+    (singleJob) => singleJob.company === job.company
+  );
+  // browseBtn.addEventListener("click", renderJobsPage(browseJobsFilter));
+  browseBtn.addEventListener("click", () => renderJobsPage(browseJobsFilter));
+};
+
 const singleJobHandler = (parentElement, jobsArray) => {
   let sectionElement = document.querySelector("section");
-  console.log(sectionElement.classList);
+  // console.log(sectionElement.classList);
 
   parentElement.addEventListener("click", (e) => {
     const clickedJob = e.target.closest("li");

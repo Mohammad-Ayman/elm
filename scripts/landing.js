@@ -1,3 +1,7 @@
+import { renderJobsPage } from "./allJobs.js";
+import { jobs } from "./filters.js";
+import { searchJobsHandler } from "./searching.js";
+
 const body = document.querySelector("body");
 const renderHomePage = () => {
   body.style.backgroundImage = `linear-gradient(
@@ -8,9 +12,9 @@ const renderHomePage = () => {
   url("../images/landing-background.jpg")`;
   body.innerHTML = `
   <header id="index__header" class="flex">
-  <a href="#" class="logo__container">
+  <div class="logo-container">
     <img src="images/logo-white.png" alt="logo" id="index__logo-header" />
-  </a>
+  </div>
   <nav>
     <ul class="sign-login flex">
       <li>
@@ -26,7 +30,6 @@ const renderHomePage = () => {
   <h2>Find the best Jobs</h2>
   <h3>Search for jobs and career opportunities</h3>
   <div id="index__search-container" class="flex">
-    <div class="icon-search flex">
       <div class="icon-container">
         <a href="#">
           <svg
@@ -51,17 +54,39 @@ const renderHomePage = () => {
         id="search"
         placeholder="Find the best Jobs"
       />
-    </div>
-    <!-- <a href="results.html" -->
-    ><button id="search-button">Search job</button>
-    <!-- </a> -->
+    <button id="search-button">Search job</button>
   </div>
 </main>
 `;
+
+  const signLogin = document.querySelectorAll("nav ul li a");
+  signLogin.forEach((element) => {
+    element.style.color = "#fff";
+  });
+  const searchBtn = document.getElementById("search-button");
+
+  // renderJobsPageHandler();
+
+  searchBtn.addEventListener("click", renderJobsPageHandler);
+  const searchBar = document.getElementById("search");
+  searchBar.addEventListener("keypress", (event) => {
+    if (event.key === "Enter") {
+      renderJobsPageHandler();
+    }
+  });
+};
+
+const renderJobsPageHandler = () => {
+  const searchBar = document.getElementById("search");
+  const searchBarInput = searchBar.value.toLowerCase().trim();
+  console.log(searchBarInput);
+  searchBar.value.length === 0
+    ? renderJobsPage(jobs)
+    : searchJobsHandler(searchBar, jobs, renderJobsPage, searchBarInput);
 };
 
 const renderHomePageHandler = () => {
-  const headerLogo = document.querySelector(".logo-header");
+  const headerLogo = document.querySelector(".logo-container");
   headerLogo.addEventListener("click", renderHomePage);
 };
 export { renderHomePage, renderHomePageHandler };
