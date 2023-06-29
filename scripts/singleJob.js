@@ -1,4 +1,5 @@
 import { renderJobsPage } from "./allJobs.js";
+import { jobs } from "./filters.js";
 
 const renderSingleJob = (job, section, jobsArray) => {
   console.log(job);
@@ -181,7 +182,7 @@ const renderSingleJob = (job, section, jobsArray) => {
 </aside>
   `;
   applyJobBtnHandler(job);
-  browseBtnHandler(job, jobsArray);
+  browseBtnHandler(job, jobs);
   backArrowHandler(jobsArray);
 };
 const applyJobBtnHandler = (job) => {
@@ -217,12 +218,11 @@ const browseBtnHandler = (job, jobsArray) => {
 
 const singleJobHandler = (parentElement, jobsArray) => {
   let sectionElement = document.querySelector("section");
-  // console.log(sectionElement.classList);
 
   parentElement.addEventListener("click", (e) => {
     const clickedJob = e.target.closest("li");
     const jobId = clickedJob.querySelector(".job-id").textContent;
-    const job = jobsArray.find((job) => job.id === +jobId);
+    const job = jobs.find((job) => job.id === +jobId);
     renderSingleJob(job, sectionElement, jobsArray);
   });
 };
