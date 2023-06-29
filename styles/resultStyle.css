@@ -123,6 +123,7 @@ container Section
 }
 
 .filter-card {
+  cursor: pointer;
   justify-content: space-between;
   align-items: flex-start;
   width: 100%;

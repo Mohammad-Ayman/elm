@@ -219,7 +219,6 @@ const categories = new Set();
 const types = new Set();
 const posted = new Set();
 
-
 jobs.forEach((job) => {
   company.add(job.company);
   countries.add(job.country);
@@ -320,40 +319,9 @@ const renderFilteredElements = (target, filter) => {
       renderJobs(filteredJobs);
     } else if (selectedElements.size === 0 || filteredJobs.length === 0) {
       createLiElement();
-      selectedElements.clear();
     }
   });
 };
-
-// let selectedElements = new Set();
-// const renderFilteredElements = (target, filter) => {
-//   let filteredJobs = [];
-//   let lastClickedFilteredJobs;
-//   const filterData = filter.dataset.filter;
-
-//   target.addEventListener("change", (e) => {
-//     const selectedElement = e.target.value;
-
-//     if (e.target.checked) {
-//       lastClickedFilteredJobs = jobs.filter(
-//         (job) => job[filterData] === selectedElement.trim()
-//       );
-//       selectedElements.add({ [filterData]: selectedElement });
-//       console.log(selectedElements);
-
-//       filteredJobs.push(...lastClickedFilteredJobs);
-//     } else {
-//       // filteredJobs = filteredJobs.filter(
-//       //   (job) => job[filterData] !== selectedElement.trim()
-//       // );
-//       selectedElements.delete(selectedElement);
-//       filteredJobs = selectedElements.size > 0 ? [...selectedElements] : [];
-//       console.log(selectedElements);
-//     }
-//     console.log("filtered jobs length", filteredJobs.length);
-//     filteredJobs.length > 0 ? renderJobs(filteredJobs) : renderJobsPage(jobs);
-//   });
-// };
 
 const displayAllBtnHandler = () => {
   const displayAll = document.getElementById("display-all");
@@ -364,7 +332,6 @@ const displayAllBtnHandler = () => {
 
 const populateFilter = (filterArray, filter) => {
   listFilterElements(filterArray, filter);
-  // displayAllBtnHandler();
 };
 
 const populateFilterHandler = () => {

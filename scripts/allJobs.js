@@ -1,5 +1,5 @@
 import { singleJobHandler } from "./singleJob.js";
-import { populateFilterHandler } from "./filters.js";
+import { populateFilterHandler, jobs } from "./filters.js";
 import { searchJobsHandler } from "./searching.js";
 import { renderHomePageHandler } from "./landing.js";
 
@@ -9,7 +9,7 @@ const searchBtn = document.getElementById("search-button");
 
 const renderJobsPage = (jobsArray) => {
   body.style.backgroundImage = "none";
-  body.innerHTML = `~
+  body.innerHTML = `  
   <header class="header flex">
         <div class="logo-container">
           <img src="images/logo.png" alt="logo" class="logo-header" />
@@ -64,7 +64,7 @@ const renderJobsPage = (jobsArray) => {
               <h2>Company</h2>
             </div>
             <div class="filter__icon-container">
-              <a href="#"
+              <div
                 ><svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -77,7 +77,7 @@ const renderJobsPage = (jobsArray) => {
                     clip-rule="evenodd"
                   />
                 </svg>
-              </a>
+              </div>
             </div>
           </li>
               <li class="filter-card flex">
@@ -85,7 +85,7 @@ const renderJobsPage = (jobsArray) => {
                   <h2>Country</h2>
                 </div>
                 <div class="filter__icon-container">
-                  <a href="#"
+                  <div
                     ><svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -98,7 +98,7 @@ const renderJobsPage = (jobsArray) => {
                         clip-rule="evenodd"
                       />
                     </svg>
-                  </a>
+                  </div>
                 </div>
               </li>
               <li class="filter-card flex">
@@ -106,7 +106,7 @@ const renderJobsPage = (jobsArray) => {
                   <h2>City</h2>
                 </div>
                 <div class="filter__icon-container">
-                  <a href="#"
+                  <div
                     ><svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -119,7 +119,7 @@ const renderJobsPage = (jobsArray) => {
                         clip-rule="evenodd"
                       />
                     </svg>
-                  </a>
+                  </div>
                 </div>
               </li>
               <li class="filter-card flex">
@@ -127,7 +127,7 @@ const renderJobsPage = (jobsArray) => {
                   <h2>Skills</h2>
                 </div>
                 <div class="filter__icon-container">
-                  <a href="#"
+                  <div
                     ><svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -140,7 +140,7 @@ const renderJobsPage = (jobsArray) => {
                         clip-rule="evenodd"
                       />
                     </svg>
-                  </a>
+                  </div>
                 </div>
               </li>
               <li class="filter-card flex">
@@ -148,7 +148,7 @@ const renderJobsPage = (jobsArray) => {
                   <h2>Job Level</h2>
                 </div>
                 <div class="filter__icon-container">
-                  <a href="#"
+                  <div
                     ><svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -161,7 +161,7 @@ const renderJobsPage = (jobsArray) => {
                         clip-rule="evenodd"
                       />
                     </svg>
-                  </a>
+                  </div>
                 </div>
               </li>
               <li class="filter-card flex">
@@ -169,7 +169,7 @@ const renderJobsPage = (jobsArray) => {
                   <h2>Job Category</h2>
                 </div>
                 <div class="filter__icon-container">
-                  <a href="#"
+                  <div
                     ><svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -182,7 +182,7 @@ const renderJobsPage = (jobsArray) => {
                         clip-rule="evenodd"
                       />
                     </svg>
-                  </a>
+                  </div>
                 </div>
               </li>
               <li class="filter-card flex">
@@ -190,7 +190,7 @@ const renderJobsPage = (jobsArray) => {
                   <h2>Job Type</h2>
                 </div>
                 <div class="filter__icon-container">
-                  <a href="#"
+                  <div
                     ><svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -203,7 +203,7 @@ const renderJobsPage = (jobsArray) => {
                         clip-rule="evenodd"
                       />
                     </svg>
-                  </a>
+                  </div>
                 </div>
               </li>
               <li class="filter-card flex">
@@ -211,7 +211,7 @@ const renderJobsPage = (jobsArray) => {
                   <h2>Date Posted</h2>
                 </div>
                 <div class="filter__icon-container">
-                  <a href="#"
+                  <div
                     ><svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -224,7 +224,7 @@ const renderJobsPage = (jobsArray) => {
                         clip-rule="evenodd"
                       />
                     </svg>
-                  </a>
+                  </div>
                 </div>
               </li>
               <li class="filter-card">
@@ -249,11 +249,11 @@ const renderJobsPage = (jobsArray) => {
   populateFilterHandler();
   const searchBar = document.getElementById("search");
   searchBar.addEventListener("change", () =>
-    searchJobsHandler(searchBar, jobsArray, renderJobsPage)
+    searchJobsHandler(searchBar, jobs, renderJobsPage)
   );
   searchBar.addEventListener("keypress", (event) => {
     if (event.key === "Enter") {
-      searchJobsHandler(searchBar, jobsArray, renderJobsPage);
+      searchJobsHandler(searchBar, jobs, renderJobsPage);
     }
   });
   // searchBar.addEventListener("change", () => {
@@ -293,18 +293,36 @@ const renderJobs = (jobsArray) => {
   singleJobHandler(ulELement, jobsArray);
 };
 
+// const toggleFilterElements = () => {
+//   const filterContainer = document.querySelector(".filters-container");
+
+//   filterContainer.addEventListener("click", (e) => {
+//     // e.preventDefault();
+//     // const clickedFilter = e.target.closest(".chevron-icon");
+//     const clickedFilter = e.target.closest(".chevron-icon");
+//     if (clickedFilter) {
+//       const h2Element = clickedFilter
+//         .closest(".filter-card")
+//         .querySelector(".text-container");
+//       if (h2Element) {
+//         clickedFilter.classList.toggle("chevron-icon__clicked");
+//         h2Element.classList.toggle("filter");
+//       }
+//     }
+//   });
+// };
 const toggleFilterElements = () => {
   const filterContainer = document.querySelector(".filters-container");
 
   filterContainer.addEventListener("click", (e) => {
-    // e.preventDefault();
-    const clickedFilter = e.target.closest(".chevron-icon");
-    if (clickedFilter) {
-      const h2Element = clickedFilter
+    const clickedListItem = e.target.closest("li");
+    if (clickedListItem) {
+      const chevronIcon = clickedListItem.querySelector(".chevron-icon");
+      const h2Element = clickedListItem
         .closest(".filter-card")
         .querySelector(".text-container");
-      if (h2Element) {
-        clickedFilter.classList.toggle("chevron-icon__clicked");
+      if (chevronIcon && h2Element) {
+        chevronIcon.classList.toggle("chevron-icon__clicked");
         h2Element.classList.toggle("filter");
       }
     }

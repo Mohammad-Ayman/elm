@@ -1,5 +1,4 @@
 import { renderJobsPage } from "./allJobs.js";
-import { searchJobsHandler } from "./searching.js";
 
 const renderSingleJob = (job, section, jobsArray) => {
   console.log(job);
@@ -184,15 +183,6 @@ const renderSingleJob = (job, section, jobsArray) => {
   applyJobBtnHandler(job);
   browseBtnHandler(job, jobsArray);
   backArrowHandler(jobsArray);
-  // const searchBar = document.getElementById("search");
-  // searchBar.addEventListener("change", () =>
-  //   searchJobsHandler(searchBar, jobsArray, renderJobsPage)
-  // );
-  // searchBar.addEventListener("keypress", (event) => {
-  //   if (event.key === "Enter") {
-  //     searchJobsHandler(searchBar, jobsArray, renderJobs);
-  //   }
-  // });
 };
 const applyJobBtnHandler = (job) => {
   const applyBtn = document.querySelector(".apply-button");
