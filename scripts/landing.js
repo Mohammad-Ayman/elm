@@ -83,6 +83,7 @@ const renderJobsPageHandler = () => {
   searchBar.value.length === 0
     ? renderJobsPage(jobs)
     : searchJobsHandler(searchBar, jobs, renderJobsPage, searchBarInput);
+  // searchJobsHandler(searchBar, jobs, renderJobsPage, searchBarInput);
 };
 
 const renderHomePageHandler = () => {

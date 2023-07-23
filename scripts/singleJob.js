@@ -181,9 +181,31 @@ const renderSingleJob = (job, section, jobsArray) => {
   <button class="browse-button">Browse all jobs</button>
 </aside>
   `;
-  applyJobBtnHandler(job);
+  applyJobBtnHandlerEmailJS(job);
   browseBtnHandler(job, jobs);
   backArrowHandler(jobsArray);
+};
+// Sending email using Email.js
+const applyJobBtnHandlerEmailJS = (job) => {
+  const applyBtn = document.querySelector(".apply-button");
+
+  const emailContent = {
+    from_name: "user",
+    to_name: job.company,
+    message: `A new application for the ${job.category} role at ${job.company} from user`,
+  };
+
+  applyBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    emailjs.send("service_test", "template_t5zr09r", emailContent).then(
+      function () {
+        alert("Email Sent Successfully");
+      },
+      function (error) {
+        console.log("FAILED...", error);
+      }
+    );
+  });
 };
 const applyJobBtnHandler = (job) => {
   const applyBtn = document.querySelector(".apply-button");
@@ -196,17 +218,19 @@ const applyJobBtnHandler = (job) => {
 
   applyBtn.addEventListener("click", (event) => {
     event.preventDefault();
-    emailjs.send("service_q3jogy9", "template_t5zr09r", emailContent).then(
-      function () {
-        alert("Email Sent Successfully");
-      },
-      function (error) {
-        console.log("FAILED...", error);
-      }
-    );
+    Email.send({
+      Host: "smtp.gmail.com",
+      Username: "mohd.ayyyy@gmail.com",
+      Password: "Enter your password",
+      To: "mohdayman22rr@gmail.com",
+      From: "mohd.ayyyy@gmail.com",
+      Subject: "New job application",
+      Body: "Well that was easy!!",
+    }).then(function (message) {
+      alert("mail sent successfully");
+    });
   });
 };
-
 const browseBtnHandler = (job, jobsArray) => {
   const browseBtn = document.querySelector(".browse-button");
   const browseJobsFilter = jobsArray.filter(
